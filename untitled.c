@@ -24,25 +24,30 @@
 
 #include <stdio.h>
 
-struct carro {
+struct Carro {
 	int tipo;
 	int velocidad;
 	int tamagno;
 	int x, y;
-	char nombre[10];
-	char simbolo[10];
-	char debajo[10];
+	char simbolo;
+	char debajo;
 
 	int llego; // es un booleano
 	int destinox, destinoy;
 	
 };
 
-struct mapa {
+struct Mapa {
 	int alto, ancho;	
 	
 	char matriz;
 	
+};
+
+
+struct Nodo { //este es el nodo para hacer la lista de carros, con esta lista se llama a la funcion carro.avanzar o algo asi
+	struct Carro carro;
+	struct Nodo *siguiente;
 };
 
 void crear_mapa() {
@@ -80,8 +85,39 @@ void crear_mapa() {
 			j++;
 			}
 		i++;
+}		
 }
 
 
-		
-}
+void general_auto(struct Mapa mapa, int tipo) { //Mae no se como es que se tiene que llamar al mapa para que se pueda modificar
+	int x = rand(); //esto tiene que ser menor que mapa.matriz.alto
+	int y = rand(); //esto tiene que ser menor que mapa.matriz.ancho
+	while (mapa.matriz[x][y] != '<' && mapa.matriz[x][y] != 'v' && mapa.matriz[x][y] != '>' && mapa.matriz[x][y] != '^'){
+		x = rand(); //esto tiene que ser menor que mapa.matriz.alto
+		y = rand(); //esto tiene que ser menor que mapa.matriz.ancho
+		}
+	
+	struct Carro *nuevo = malloc(sizeof(struct Carro));
+	
+	nuevo.x = x;
+	nuevo.y = y;
+	
+	nuevo.debajo = mapa.matriz[x][y];
+	nuevo.tipo = tipo;
+	//AQUI SE MODIFICA EL MAPA PARA QUE SALGAN LOS CARROS
+	if (nuevo.tipo = 1){	//el tipo 1 es un carro normal
+		mapa.matriz[x][y] = '¤';
+		nuevo.simbolo = '¤';
+		nuevo.tamagno = 1;
+	}
+	//el tipo 2 puede ser una ambulancia
+	
+	else {
+		//DAR ERROR DE QUE NO EXISTE ESE TIPO
+		}
+	
+	//se agrega el carro a la lista
+	
+	
+	
+	}
