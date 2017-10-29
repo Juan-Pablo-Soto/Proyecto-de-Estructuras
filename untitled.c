@@ -21,8 +21,9 @@
  * 
  */
 
-
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 struct Carro {
 	int tipo;
@@ -50,9 +51,10 @@ struct Nodo { //este es el nodo para hacer la lista de carros, con esta lista se
 	struct Nodo *siguiente;
 };
 
+/*
 void crear_mapa() {
 	FILE *fp;
-	fp = fopen("NOMBRE", "r");
+	fp = fopen("Mapa850.txt", "r");
 	
 	char control;
 	int ancho = 0;
@@ -62,6 +64,8 @@ void crear_mapa() {
 		ancho = ancho * 10;
 		control = fgetc(fp);
 		ancho = ancho + (int)(control-1); 
+		
+		printf("primer while");
 		} 
 	
 	control = fgetc(fp);
@@ -70,25 +74,40 @@ void crear_mapa() {
 		alto = alto * 10;
 		control = fgetc(fp);
 		alto = alto + (int)(control-1); 
+		printf("segundo while");
 	}
 	
 
-	control = fgetc(fp);
 	char matriz[alto][ancho];
 	int i = 0;
 
 	while(!feof(fp)){
 		int j = 0;		
+		printf("tercer while");
 		while(fgetc(fp)!='\n'){
 			control = fgetc(fp);
 			matriz[i][j] = control;
 			j++;
 			}
 		i++;
-}		
 }
 
+int x=0;
+while (x<alto){
+	int y= 0;
+	
+	while(y<ancho){
+		printf("%c",matriz[x][y]);
+		}
+	
+	}
 
+
+fclose(fp);
+		
+}
+
+/*
 void general_auto(struct Mapa mapa, int tipo) { //Mae no se como es que se tiene que llamar al mapa para que se pueda modificar
 	int x = rand(); //esto tiene que ser menor que mapa.matriz.alto
 	int y = rand(); //esto tiene que ser menor que mapa.matriz.ancho
@@ -120,4 +139,55 @@ void general_auto(struct Mapa mapa, int tipo) { //Mae no se como es que se tiene
 	
 	
 	
-	}
+	} */
+	
+	
+	
+	#include <stdio.h>
+
+int main()
+{
+		
+	FILE *fp;
+	fp = fopen("Mapa850.txt", "r");
+	
+	char control[200];
+	char ancho;
+	char alto;
+	
+	//int alto = 0;
+	
+	
+	fgets(control,'\n',fp);
+	puts(control);
+	
+	ancho=control;
+	printf("%c \n",ancho);
+	
+	fgets(control,'\n',fp);
+	puts(control);
+	
+	alto=control;
+	printf("%c \n",alto);
+	
+	
+	while (!feof(fp)){
+	fgets(control,200,fp);
+	puts(control);
+	
+	
+}
+	
+	
+	
+	
+
+fclose(fp);
+		
+
+
+		
+        
+        return 0;
+}
+
