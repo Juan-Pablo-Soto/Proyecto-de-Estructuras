@@ -162,14 +162,14 @@ int main()
 	puts(control);
 	
 	ancho=control;/*lo guardo*/
-	printf("%c \n",ancho);
+	printf("%s \n",ancho);
 	
 	/*extrae el alto*/
 	fgets(control,'\n',fp);
 	puts(control);
 	
 	alto=control;/*lo guardo*/
-	printf("%c \n",alto);
+	printf("%s \n",alto);
 	
 	/*extrae el mapa*/
 	while (!feof(fp)){
