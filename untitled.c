@@ -157,20 +157,21 @@ int main()
 	
 	//int alto = 0;
 	
-	
+	/*extrae el ancho*/
 	fgets(control,'\n',fp);
 	puts(control);
 	
-	ancho=control;
+	ancho=control;/*lo guardo*/
 	printf("%c \n",ancho);
 	
+	/*extrae el alto*/
 	fgets(control,'\n',fp);
 	puts(control);
 	
-	alto=control;
+	alto=control;/*lo guardo*/
 	printf("%c \n",alto);
 	
-	
+	/*extrae el mapa*/
 	while (!feof(fp)){
 	fgets(control,200,fp);
 	puts(control);
