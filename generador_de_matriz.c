@@ -3,10 +3,10 @@
 int main()
 {
 		
-	FILE *fp;
+FILE *fp;
 	fp = fopen("Mapa850.txt", "r");
 	
-	char control;
+	char control=' ';
 	int ancho;
 	int alto;
 	
@@ -24,14 +24,22 @@ int main()
 	/*extrae el mapa*/
 	int i = 0;
 	int j = 0;
+	int contador = 0;
 	while(!feof(fp)){
 		control = fgetc(fp);
-		if(control == '\n'){
+		
+		
+		printf("iteracion %d \n",contador);
+		contador++;
+		
+		if(control == '\n' || control==' '){
+			printf("aqui hay salto de linea o espacio \n");
 			i++;
 			j = 0;
-			control = fgetc(fp);
+			//control = fgetc(fp);
 			}
 		else {
+			printf("aqui inserta en matriz el elemento: %c \n", control);
 			matriz[i][j] = control;
 			j++;
 		}
@@ -39,7 +47,8 @@ int main()
 	
 	for(i = 0; i < alto; i++){
 		for(j = 0; j < ancho;j ++){
-			printf(" %c ",matriz[i][j]);
+			char x = matriz[i][j];
+			printf("%c", x);
 			}
 		printf("\n");
 		}
@@ -52,6 +61,6 @@ fclose(fp);
 
 		
         
-        return 0;
+return 0;
 }
 
