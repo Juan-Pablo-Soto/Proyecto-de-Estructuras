@@ -7,16 +7,17 @@ struct Carro {
 	int velocidad;
 	int tamano;
 	int x, y;
-	char simbolo[1];
-	char debajo[1];
+	char simbolo;
+	char debajo;
 
 	int llego; // es un booleano
 	int destinox, destinoy;
 	
+	struct Carro *siguiente;
 };
 
 struct Carro *primero, *ultimo;
-
+//---------------------------------------------------------------------------
 struct Mapa {
 	int alto, ancho;	
 	
@@ -25,7 +26,7 @@ struct Mapa {
 };
 
 struct Mapa map;
-
+//---------------------------------------------------------------------------
 void imprimirMapa(struct Mapa map){
 	
 	for(int i = 0; i < map.alto; i++) {
@@ -35,14 +36,68 @@ void imprimirMapa(struct Mapa map){
 	}
 	
 	};
+//---------------------------------------------------------------------------	
+void generarPosicion(struct Mapa map, struct Carro * car){
+
+	
+	int x = rand() % map.alto+1;
+	int y = rand() % map.ancho+1;
+	
+	printf("alto: %d, ancho: %d \n",x,y);
+;
+	
+	if(map.matriz[x][y]==60 || map.matriz[x][y]==84 ||map.matriz[x][y]==62 ||map.matriz[x][y]==118){
+		car->x=x;
+		car->y=y;
+		car->debajo = map.matriz[x][y];
+		map.matriz[x][y]=207;
+		}
+	else{
+		generarPosicion(map, car);
+
+		}
+	
+	};
 
 
+//---------------------------------------------------------------------------
+void generarCarro(struct Mapa map,struct Carro *primero){
+	
+	struct Carro *nuevo;
+	
+	nuevo = (struct Carro *) malloc (sizeof(struct Carro));
+	
+	if (nuevo == NULL){printf("no hay espacio en memoria");}
+	
+	
+	nuevo->tipo=1;
+	nuevo->velocidad=1;
+	nuevo->tamano=1;
+	nuevo->simbolo=207;
+	generarPosicion(map, nuevo);
+	nuevo->llego=1;
+	/*falta generar el destino*/
+	
+	nuevo->siguiente=NULL;
+	
+	if(primero==NULL){
+		primero=nuevo;
+		ultimo=nuevo;
+		}
+	else{
+		ultimo->siguiente=nuevo;
+		ultimo=nuevo;
+		}
+	
+	imprimirMapa(map);
+	};
+
+//---------------------------------------------------------------------------
 void main(int argc, char const *argv[])
 {
-
-
-
-
+	
+primero = (struct Carro *) NULL;
+ultimo = (struct Carro *) NULL;
 
 FILE *fp;
 fp = fopen("Mapa850.txt", "r");
@@ -54,20 +109,16 @@ int alto;
 /*extrae el alto*/
 fscanf(fp, "%d", &alto);
 
-printf("%d \n",alto);
+//printf("%d \n",alto);
 
 /*extrae el ancho*/
 
 fscanf(fp, "%d", &ancho);
-printf("%d \n",ancho);
+//printf("%d \n",ancho);
 
 
-//int i = 0;
-//int j = 0;
 int c;
 
-
-//char matriz[alto][ancho];
 map.alto=alto;
 map.ancho=ancho;
 
@@ -88,7 +139,9 @@ map.matriz[i][j] = c;
 }
 }
 
-imprimirMapa(map);
+generarCarro(map, primero);
+//imprimirMapa(map);
+
 
 
 fclose(fp);
@@ -99,3 +152,4 @@ fclose(fp);
 
 return;
 }
+
