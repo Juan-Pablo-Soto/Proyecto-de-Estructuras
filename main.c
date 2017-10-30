@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 struct Carro {
 	int tipo;
@@ -39,11 +40,10 @@ void imprimirMapa(struct Mapa map){
 //---------------------------------------------------------------------------	
 void generarPosicion(struct Mapa map, struct Carro * car){
 
-	
+	srand(time(NULL));
 	int x = rand() % map.alto+1;
 	int y = rand() % map.ancho+1;
-	
-	printf("alto: %d, ancho: %d \n",x,y);
+
 ;
 	
 	if(map.matriz[x][y]==60 || map.matriz[x][y]==84 ||map.matriz[x][y]==62 ||map.matriz[x][y]==118){
@@ -53,7 +53,9 @@ void generarPosicion(struct Mapa map, struct Carro * car){
 		map.matriz[x][y]=207;
 		}
 	else{
+		sleep(1);
 		generarPosicion(map, car);
+		
 
 		}
 	
@@ -92,6 +94,30 @@ void generarCarro(struct Mapa map,struct Carro *primero){
 	imprimirMapa(map);
 	};
 
+//---------------------------------------------------------------------------
+/*void simulation(struct Mapa map, struct Carro* primero){
+	
+	struct Carro * aux;
+	
+	int i=20;
+	
+	while (i!=0){
+			
+		aux=primero;
+		
+		while(aux=NULL){
+			
+			if(aux->debajo==60)
+			
+			aux=aux->siguiente;
+			}
+		i++;
+		}
+	
+	
+	};
+
+*/
 //---------------------------------------------------------------------------
 void main(int argc, char const *argv[])
 {
@@ -138,11 +164,18 @@ char c = fgetc(fp);
 map.matriz[i][j] = c;
 }
 }
-
+/*
 generarCarro(map, primero);
-//imprimirMapa(map);
+printf("\n -------------------------------------- \n");
+generarCarro(map, primero);
+printf("\n -------------------------------------- \n");
+generarCarro(map, primero);
+printf("\n -------------------------------------- \n");
+generarCarro(map, primero);
 
+*/
 
+imprimirMapa(map);
 
 fclose(fp);
 
